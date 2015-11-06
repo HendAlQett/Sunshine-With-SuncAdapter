@@ -2,32 +2,32 @@
 <items version="2" >
 
     <item
-        jar="/Users/hend/Documents/Android Projects/Udacity Nanodegree/Git Repos/Sunshine/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/jars/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="d84409890828e07d344a3b9b1da545dba9897b51">
-        <dex dex="/Users/hend/Documents/Android Projects/Udacity Nanodegree/Git Repos/Sunshine/app/build/intermediates/pre-dexed/debug/classes-5f787c037665fd2ead19436ff7b24250d82d0fdd.jar" />
-    </item>
-    <item
-        jar="/Users/hend/Documents/Android Projects/Udacity Nanodegree/Git Repos/Sunshine/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/jars/libs/internal_impl-22.0.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
-        <dex dex="/Users/hend/Documents/Android Projects/Udacity Nanodegree/Git Repos/Sunshine/app/build/intermediates/pre-dexed/debug/internal_impl-22.0.0-bac40b3192993bce578b343a73dd7c8ddb33eca5.jar" />
-    </item>
-    <item
-        jar="/Users/hend/Documents/Android Projects/Udacity Nanodegree/Git Repos/Sunshine/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/jars/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
-        <dex dex="/Users/hend/Documents/Android Projects/Udacity Nanodegree/Git Repos/Sunshine/app/build/intermediates/pre-dexed/debug/classes-a9c1f7e8f202e44eb0564218c90c3c241f281d80.jar" />
-    </item>
-    <item
         jar="/Users/hend/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/22.0.0/support-annotations-22.0.0.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
-        <dex dex="/Users/hend/Documents/Android Projects/Udacity Nanodegree/Git Repos/Sunshine/app/build/intermediates/pre-dexed/debug/support-annotations-22.0.0-778ccad598f6baa188d15a6b12f6853c004175bf.jar" />
+        <dex dex="/Users/hend/Documents/Android Projects/Udacity Nanodegree/Git Repos/Sunshine-With-SuncAdapter/app/build/intermediates/pre-dexed/debug/support-annotations-22.0.0-778ccad598f6baa188d15a6b12f6853c004175bf.jar" />
+    </item>
+    <item
+        jar="/Users/hend/Documents/Android Projects/Udacity Nanodegree/Git Repos/Sunshine-With-SuncAdapter/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/jars/libs/internal_impl-22.0.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
+        <dex dex="/Users/hend/Documents/Android Projects/Udacity Nanodegree/Git Repos/Sunshine-With-SuncAdapter/app/build/intermediates/pre-dexed/debug/internal_impl-22.0.0-151f68d4e8da4bc81bbfcee32e2a9e34cbd899d1.jar" />
+    </item>
+    <item
+        jar="/Users/hend/Documents/Android Projects/Udacity Nanodegree/Git Repos/Sunshine-With-SuncAdapter/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="d84409890828e07d344a3b9b1da545dba9897b51">
+        <dex dex="/Users/hend/Documents/Android Projects/Udacity Nanodegree/Git Repos/Sunshine-With-SuncAdapter/app/build/intermediates/pre-dexed/debug/classes-925681fbe20c29856c1a8807c57e9f3b56b6c86f.jar" />
+    </item>
+    <item
+        jar="/Users/hend/Documents/Android Projects/Udacity Nanodegree/Git Repos/Sunshine-With-SuncAdapter/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
+        <dex dex="/Users/hend/Documents/Android Projects/Udacity Nanodegree/Git Repos/Sunshine-With-SuncAdapter/app/build/intermediates/pre-dexed/debug/classes-12fc174b0b91f7787a36e782231f9bb1973d2a17.jar" />
     </item>
 
 </items>

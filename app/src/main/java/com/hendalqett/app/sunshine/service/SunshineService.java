@@ -12,6 +12,7 @@ import android.text.format.Time;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 
+import com.hendalqett.app.sunshine.BuildConfig;
 import com.hendalqett.app.sunshine.data.WeatherContract;
 
 import org.json.JSONArray;
@@ -66,15 +67,15 @@ public class SunshineService extends IntentService {
             final String FORMAT_PARAM = "mode";
             final String UNITS_PARAM = "units";
             final String DAYS_PARAM = "cnt";
-            final String API_KEY = "APPID";
-            final String API_KEY_VALUE = "EMPTY_API_KEY";
+            final String APPID_PARAM = "APPID";
+
 
             Uri builtUri = Uri.parse(FORECAST_BASE_URL).buildUpon()
                     .appendQueryParameter(QUERY_PARAM, locationQuery)
                     .appendQueryParameter(FORMAT_PARAM, format)
                     .appendQueryParameter(UNITS_PARAM, units)
                     .appendQueryParameter(DAYS_PARAM, Integer.toString(numDays))
-                    .appendQueryParameter(API_KEY, API_KEY_VALUE)
+                    .appendQueryParameter(APPID_PARAM, BuildConfig.OPEN_WEATHER_MAP_API_KEY)
                     .build();
 
             URL url = new URL(builtUri.toString());
