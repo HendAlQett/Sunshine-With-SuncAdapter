@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.hendalqett.app.sunshine.sync.SunshineSyncAdapter;
+
 
 public class MainActivity extends ActionBarActivity implements ForecastFragment.Callback {
 
@@ -24,12 +26,6 @@ public class MainActivity extends ActionBarActivity implements ForecastFragment.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mLocation = Utility.getPreferredLocation(this);
-//        if (savedInstanceState == null) {
-//            getSupportFragmentManager().beginTransaction()
-//                    .add(R.id.container, new ForecastFragment(), FORECASTFRAGMENT_TAG)
-//                    .commit();
-//        }
-//        Log.d(LOG_TAG,"onCreate");
 
 
         if (findViewById(R.id.weather_detail_container) != null) {
@@ -55,6 +51,8 @@ public class MainActivity extends ActionBarActivity implements ForecastFragment.
         ForecastFragment forecastFragment = ((ForecastFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.fragment_forecast));
         forecastFragment.setUseTodayLayout(!mTwoPane);
+
+        SunshineSyncAdapter.initializeSyncAdapter(this);
 
     }
 
@@ -133,31 +131,13 @@ public class MainActivity extends ActionBarActivity implements ForecastFragment.
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
             return true;
-        } else if (id == R.id.action_map) {
-            openPreferredLocationInMap();
         }
 
 
         return super.onOptionsItemSelected(item);
     }
 
-    private void openPreferredLocationInMap() {
 
-//        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(MainActivity.this); //getDefSharedPreferences(getString(R.string.pref_location_key),Context.MODE_PRIVATE);
-//        String location = pref.getString(getString(R.string.pref_location_key), getString(R.string.pref_location_default));
-        String location = Utility.getPreferredLocation(this);
-
-        Uri geoLocation = Uri.parse("geo:0,0?").buildUpon().appendQueryParameter("q", location).build();
-
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(geoLocation);
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivity(intent);
-        } else {
-            Log.d(LOG_TAG, "Couldn't call " + location);
-        }
-        //showMap(geoLocation);
-    }
 
     public void showMap(Uri geoLocation) {
         Intent intent = new Intent(Intent.ACTION_VIEW);

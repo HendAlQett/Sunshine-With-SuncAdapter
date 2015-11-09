@@ -28,8 +28,9 @@ public class TestDb extends AndroidTestCase {
     static final String TEST_LOCATION = "11765";
 
     // Since we want each test to start with a clean slate
+
     void deleteTheDatabase() {
-        mContext.deleteDatabase(WeatherDbHelper.DATABASE_NAME);
+         mContext.deleteDatabase(WeatherDbHelper.DATABASE_NAME);
     }
 
     /*

@@ -3,19 +3,31 @@
     package="com.hendalqett.app.sunshine" >
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission
+        android:name="android.permission.READ_SYNC_SETTINGS"/>
+    <uses-permission
+        android:name="android.permission.WRITE_SYNC_SETTINGS"/>
+    <uses-permission
+        android:name="android.permission.AUTHENTICATE_ACCOUNTS"/>
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        <!--<provider-->
+            <!--android:authorities="com.hendalqett.app.sunshine"-->
+            <!--android:name="com.hendalqett.app.sunshine.data.WeatherProvider"-->
+            <!--android:enabled="true"-->
+            <!--android:exported="true"-->
+            <!--android:permission="com.hendalqett.app.sunshine.LICENCE_TO_KILL"-->
+            <!--/>-->
+
         <provider
-            android:authorities="com.hendalqett.app.sunshine"
-            android:name="com.hendalqett.app.sunshine.data.WeatherProvider"
-            android:enabled="true"
-            android:exported="true"
-            android:permission="com.hendalqett.app.sunshine.LICENCE_TO_KILL"
-            />
+            android:authorities="@string/content_authority"
+            android:name=".data.WeatherProvider"
+            android:exported="false"
+            android:syncable="true" />
 
         <permission
             android:name="com.hendalqett.app.sunshine.LICENCE_TO_KILL"
@@ -65,8 +77,30 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.hendalqett.app.sunshine.MainActivity" />
         </activity>
-        <service android:name=".service.SunshineService"/>
-        <receiver android:name=".service.SunshineService$AlarmReceiver"/>
+        <!--<service android:name=".service.SunshineService"/>-->
+        <!--<receiver android:name=".service.SunshineService$AlarmReceiver"/>-->
+
+        <service
+            android:name=".sync.SunshineAuthenticatorService"
+            >
+            <intent-filter>
+                <action android:name="android.accounts.AccountAuthenticator" />
+            </intent-filter>
+            <meta-data
+                android:name="android.accounts.AccountAuthenticator"
+                android:resource="@xml/authenticator" />
+        </service>
+        <service
+            android:name=".sync.SunshineSyncService"
+            android:exported="true"
+            >
+            <intent-filter>
+                <action android:name="android.content.SyncAdapter" />
+            </intent-filter>
+            <meta-data
+                android:name="android.content.SyncAdapter"
+                android:resource="@xml/syncadapter" />
+        </service>
     </application>
 
 </manifest>

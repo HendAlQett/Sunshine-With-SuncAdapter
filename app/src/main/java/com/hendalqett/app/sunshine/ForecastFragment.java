@@ -1,9 +1,6 @@
 package com.hendalqett.app.sunshine;
 
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -23,7 +20,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.hendalqett.app.sunshine.data.WeatherContract;
-import com.hendalqett.app.sunshine.service.SunshineService;
+import com.hendalqett.app.sunshine.sync.SunshineSyncAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -69,7 +66,7 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
     View rootView;
 
 
-    private final String LOG_TAG = FetchWeatherTask.class.getSimpleName();
+    private final String LOG_TAG = ForecastFragment.class.getSimpleName();
     final static int FORECAST_LOADER = 0;
 
     private ForecastAdapter mForecastAdapter;
@@ -232,10 +229,14 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
     public boolean onOptionsItemSelected(MenuItem item) {
 
         int id = item.getItemId();
-        if (id == R.id.action_refresh) {
+//        if (id == R.id.action_refresh) {
+//
+//            updateWeather();
+//            return true;
+//        }
 
-            updateWeather();
-            return true;
+        if (id == R.id.action_map) {
+            openPreferredLocationInMap();
         }
 
         return super.onOptionsItemSelected(item);
@@ -244,231 +245,20 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
 
     private void updateWeather() {
 
-//        FetchWeatherTask weatherTask = new FetchWeatherTask(getActivity());
-//        String location = Utility.getPreferredLocation(getActivity());
-        //weatherTask.execute(location);
 
-        //1- create an intent for the receiver
-        Intent alarmIntent = new Intent(getActivity(), SunshineService.AlarmReceiver.class);
-        alarmIntent.putExtra(SunshineService.LOCATION_QUERY_EXTRA,Utility.getPreferredLocation(getActivity()));
-        //2- Wrap this intent in a pending intent.
-        PendingIntent pendingIntent= PendingIntent.getBroadcast(getActivity(),0,alarmIntent,PendingIntent.FLAG_ONE_SHOT);
-        //3- Get the Alarm service
-        AlarmManager am = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-        //4- Set the Alarm to trigger 5 seconds from now
-        am.set(AlarmManager.RTC_WAKEUP,System.currentTimeMillis()+5000,pendingIntent);
-        //5- Start the service inside onReceive
-//        Intent intent = new Intent(getActivity(), SunshineService.class);
-//        intent.putExtra(SunshineService.LOCATION_QUERY_EXTRA,
-//              Utility.getPreferredLocation(getActivity()));
-//        getActivity().startService(intent);
+//        //1- create an intent for the receiver
+//        Intent alarmIntent = new Intent(getActivity(), SunshineService.AlarmReceiver.class);
+//        alarmIntent.putExtra(SunshineService.LOCATION_QUERY_EXTRA, Utility.getPreferredLocation(getActivity()));
+//        //2- Wrap this intent in a pending intent.
+//        PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, alarmIntent, PendingIntent.FLAG_ONE_SHOT);
+//        //3- Get the Alarm service
+//        AlarmManager am = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+//        //4- Set the Alarm to trigger 5 seconds from now
+//        am.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 5000, pendingIntent);
+//        //5- Start the service inside onReceive inside the inner Broadcast
+
+        SunshineSyncAdapter.syncImmediately(getActivity());
     }
-
-//    public class FetchWeatherTask extends AsyncTask<String, Void, String[]> {
-//
-//        private String formatHighLows(double high, double low, String unitType) {
-//
-//            if (unitType.equals(getString(R.string.pref_units_imperial))) {
-//                high = (high * 1.8) + 32;
-//                low = (low * 1.8) + 32;
-//            } else if (!unitType.equals(getString(R.string.pref_units_metric))) {
-//                Log.d(LOG_TAG, "Unit type not found: " + unitType);
-//            }
-//
-//            // For presentation, assume the user doesn't care about tenths of a degree.
-//            long roundedHigh = Math.round(high);
-//            long roundedLow = Math.round(low);
-//
-//            String highLowStr = roundedHigh + "/" + roundedLow;
-//            return highLowStr;
-//        }
-//
-//        private String[] getWeatherDataFromJson(String forecastJsonStr, int numDays)
-//                throws JSONException {
-//
-//            // These are the names of the JSON objects that need to be extracted.
-//            final String OWM_LIST = "list";
-//            final String OWM_WEATHER = "weather";
-//            final String OWM_TEMPERATURE = "temp";
-//            final String OWM_MAX = "max";
-//            final String OWM_MIN = "min";
-//            final String OWM_DESCRIPTION = "main";
-//
-//            JSONObject forecastJson = new JSONObject(forecastJsonStr);
-//            JSONArray weatherArray = forecastJson.getJSONArray(OWM_LIST);
-//
-//            // OWM returns daily forecasts based upon the local time of the city that is being
-//            // asked for, which means that we need to know the GMT offset to translate this data
-//            // properly.
-//
-//            // Since this data is also sent in-order and the first day is always the
-//            // current day, we're going to take advantage of that to get a nice
-//            // normalized UTC date for all of our weather.
-//
-//            Time dayTime = new Time();
-//            dayTime.setToNow();
-//
-//            // we start at the day returned by local time. Otherwise this is a mess.
-//            int julianStartDay = Time.getJulianDay(System.currentTimeMillis(), dayTime.gmtoff);
-//
-//            // now we work exclusively in UTC
-//            dayTime = new Time();
-//
-//            String[] resultStrs = new String[numDays];
-//
-//            // Data is fetched in Celsius by default.
-//            // If user prefers to see in Fahrenheit, convert the values here.
-//            // We do this rather than fetching in Fahrenheit so that the user can
-//            // change this option without us having to re-fetch the data once
-//            // we start storing the values in a database.
-//            SharedPreferences sharedPrefs =
-//                    PreferenceManager.getDefaultSharedPreferences(getActivity());
-//            String unitType = sharedPrefs.getString(
-//                    getString(R.string.pref_units_key),
-//                    getString(R.string.pref_units_metric));
-//
-//            for (int i = 0; i < weatherArray.length(); i++) {
-//                // For now, using the format "Day, description, hi/low"
-//                String day;
-//                String description;
-//                String highAndLow;
-//
-//                // Get the JSON object representing the day
-//                JSONObject dayForecast = weatherArray.getJSONObject(i);
-//
-//                // The date/time is returned as a long.  We need to convert that
-//                // into something human-readable, since most people won't read "1400356800" as
-//                // "this saturday".
-//                long dateTime;
-//                // Cheating to convert this to UTC time, which is what we want anyhow
-//                dateTime = dayTime.setJulianDay(julianStartDay + i);
-//                day = getReadableDateString(dateTime);
-//
-//                // description is in a child array called "weather", which is 1 element long.
-//                JSONObject weatherObject = dayForecast.getJSONArray(OWM_WEATHER).getJSONObject(0);
-//                description = weatherObject.getString(OWM_DESCRIPTION);
-//
-//                // Temperatures are in a child object called "temp".  Try not to name variables
-//                // "temp" when working with temperature.  It confuses everybody.
-//                JSONObject temperatureObject = dayForecast.getJSONObject(OWM_TEMPERATURE);
-//                double high = temperatureObject.getDouble(OWM_MAX);
-//                double low = temperatureObject.getDouble(OWM_MIN);
-//
-//                highAndLow = formatHighLows(high, low, unitType);
-//                resultStrs[i] = day + " - " + description + " - " + highAndLow;
-//            }
-//            return resultStrs;
-//
-//        }
-//
-//
-//        @Override
-//        protected String[] doInBackground(String... params) {
-//
-//            // These two need to be declared outside the try/catch
-//            // so that they can be closed in the finally block.
-//            HttpURLConnection urlConnection = null;
-//            BufferedReader reader = null;
-//
-//            // Will contain the raw JSON response as a string.
-//            String forecastJsonStr = null;
-//            String format = "json";
-//            String units = "metric";
-//            int numDays = 7;
-//
-//            try {
-//                // Construct the URL for the OpenWeatherMap query
-//                // Possible parameters are avaiable at OWM's forecast API page, at
-//                // http://openweathermap.org/API#forecast
-//
-//                final String FORECAST_BASE_URL = "http://api.openweathermap.org/data/2.5/forecast/daily"; //I can add or remove the question mark and it is going to work anyway
-//                Uri uriBuilder = Uri.parse(FORECAST_BASE_URL).buildUpon().
-//
-//                        appendQueryParameter("q", params[0]).
-//                        appendQueryParameter("mode", format).
-//                        appendQueryParameter("units", units).
-//                        appendQueryParameter("cnt", Integer.toString(numDays)).build();
-//                //URL url = new URL("http://api.openweathermap.org/data/2.5/forecast/daily?q=94043&mode=json&units=metric&cnt=7");
-//                URL url = new URL(uriBuilder.toString());
-//
-//                Log.d(LOG_TAG, url.toString());
-//                // Create the request to OpenWeatherMap, and open the connection
-//                urlConnection = (HttpURLConnection) url.openConnection();
-//                urlConnection.setRequestMethod("GET");
-//                urlConnection.connect();
-//
-//                // Read the input stream into a String
-//                InputStream inputStream = urlConnection.getInputStream();
-//                StringBuffer buffer = new StringBuffer();
-//                if (inputStream == null) {
-//                    // Nothing to do.
-//                    return null;
-//                }
-//                reader = new BufferedReader(new InputStreamReader(inputStream));
-//
-//                String line;
-//                while ((line = reader.readLine()) != null) {
-//                    // Since it's JSON, adding a newline isn't necessary (it won't affect parsing)
-//                    // But it does make debugging a *lot* easier if you print out the completed
-//                    // buffer for debugging.
-//                    buffer.append(line + "\n");
-//                }
-//
-//                if (buffer.length() == 0) {
-//                    // Stream was empty.  No point in parsing.
-//                    return null;
-//                }
-//                forecastJsonStr = buffer.toString();
-//                Log.v(LOG_TAG, "Forecast JSON String: " + forecastJsonStr);
-//                return getWeatherDataFromJson(forecastJsonStr, numDays);
-//            } catch (IOException e) {
-//                Log.e(LOG_TAG, "Error ", e);
-//                // If the code didn't successfully get the weather data, there's no point in attempting
-//                // to parse it.
-//                return null;
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            } finally {
-//                if (urlConnection != null) {
-//                    urlConnection.disconnect();
-//                }
-//                if (reader != null) {
-//                    try {
-//                        reader.close();
-//                    } catch (final IOException e) {
-//                        Log.e(LOG_TAG, "Error closing stream", e);
-//                    }
-//                }
-//            }
-//
-//            return null;
-//        }
-//
-//        //Ctrl+ O to show methods to implement
-//        @Override
-//        protected void onPostExecute(String[] strings) {
-//            super.onPostExecute(strings);
-//            if (strings != null) {
-////            adapter = new ArrayAdapter<>(getActivity(), R.layout.list_item_forecast, R.id.list_item_forcast_textview, Arrays.asList(strings));
-//                //OR
-//                adapter.clear();
-//                //I can use addAll method starting HoneyComb
-//                for (String dayForeCast : strings) {
-//                    adapter.add(dayForeCast);
-//                }
-//
-//                list.setAdapter(adapter);
-//            }
-//        }
-//
-//        //        @Override
-////        protected void onPostExecute(String[] strings) {
-////            super.onPostExecute(strings);
-////            Log.d(LOG_TAG,strings[0]);
-////
-////
-////        }
-//    }
 
     /* The date/time conversion code is going to be moved outside the asynctask later,
           * so for convenience we're breaking it out into its own method now.
@@ -613,6 +403,31 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
         return max;
     }
 
+    private void openPreferredLocationInMap() {
+
+        // Using the URI scheme for showing a location found on a map.  This super-handy
+        // intent can is detailed in the "Common Intents" page of Android's developer site:
+        // http://developer.android.com/guide/components/intents-common.html#Maps
+        if ( null != mForecastAdapter ) {
+            Cursor c = mForecastAdapter.getCursor();
+            if ( null != c ) {
+                c.moveToPosition(0);
+                String posLat = c.getString(COL_COORD_LAT);
+                String posLong = c.getString(COL_COORD_LONG);
+                Uri geoLocation = Uri.parse("geo:" + posLat + "," + posLong);
+
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(geoLocation);
+
+                if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+                    startActivity(intent);
+                } else {
+                    Log.d(LOG_TAG, "Couldn't call " + geoLocation.toString() + ", no receiving apps installed!");
+                }
+            }
+
+        }
+    }
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {

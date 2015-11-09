@@ -89,6 +89,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
         Bundle arguments = getArguments();
         if (arguments != null) {
             mUri = arguments.getParcelable(DetailFragment.DETAIL_URI);
+            Log.d(LOG_TAG,mUri.toString());
         }
 
 //        Intent intent = getActivity().getIntent();
