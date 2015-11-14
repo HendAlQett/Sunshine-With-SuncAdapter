@@ -1,4 +1,4 @@
-# Sunshine-With-SuncAdapter
+# Sunshine-With-SyncAdapter
 This is the udacity sunshine app, and the network requests implemented SyncAdapter  
 
 Genrating API key for Weather Map API:
