@@ -126,6 +126,8 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
 
         rootView = inflater.inflate(R.layout.fragment_main, container, false);
         mListView = (ListView) rootView.findViewById(R.id.listview_forecast);
+        View emptyView = rootView.findViewById(R.id.listview_forecast_empty);
+        mListView.setEmptyView(emptyView);
         mListView.setAdapter(mForecastAdapter);
 //        ArrayList<String> weatherForecastList = new ArrayList<>();
 //        weatherForecastList.add("Today - Sunny - 88/63");
