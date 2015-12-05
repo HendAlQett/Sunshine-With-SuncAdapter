@@ -2,9 +2,11 @@ package com.hendalqett.app.sunshine;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
@@ -32,7 +34,7 @@ import java.text.SimpleDateFormat;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class ForecastFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+public class ForecastFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>, SharedPreferences.OnSharedPreferenceChangeListener {
 
     private static final String[] FORECAST_COLUMNS = {
             // In this case the id needs to be fully qualified with a table name, since
@@ -77,6 +79,7 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
     private static final String SELECTED_KEY = "selected_position";
 
     private boolean mUseTodayLayout;
+
 
     /**
      * A callback interface that all activities containing this fragment must
@@ -130,34 +133,6 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
         View emptyView = rootView.findViewById(R.id.listview_forecast_empty);
         mListView.setEmptyView(emptyView);
         mListView.setAdapter(mForecastAdapter);
-//        ArrayList<String> weatherForecastList = new ArrayList<>();
-//        weatherForecastList.add("Today - Sunny - 88/63");
-//        weatherForecastList.add("Tomorrow - Foggy - 70/46");
-//        weatherForecastList.add("Weds - Cloudy - 72/63");
-//        weatherForecastList.add("Thurs - Rainy - 64/51");
-//        weatherForecastList.add("Fri - Foggy - 70/46");
-//        weatherForecastList.add("Sat - Sunny - 76/68");
-
-
-        //Arrays.asList(array)
-//        mForecastAdapter = new ArrayAdapter<>(getActivity(), R.layout.list_item_forecast, R.id.list_item_forcast_textview, weatherForecastList);
-
-
-//        list.setAdapter(mForecastAdapter);
-//
-//        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Object item = parent.getItemAtPosition(position);
-////                Toast.makeText(getActivity(), item.toString(),Toast.LENGTH_SHORT ).show();
-//                //I can use adapter instead of parent, both work
-//                String forecast = parent.getItemAtPosition(position).toString();
-//                Toast.makeText(getActivity(), forecast.toString(), Toast.LENGTH_SHORT).show();
-//                Intent intent = new Intent(getActivity(), DetailActivity.class);
-//                intent.putExtra(Intent.EXTRA_TEXT, forecast);
-//                startActivity(intent);
-//            }
-//        });
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -179,7 +154,6 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
             }
         });
 
-//        getActivity().getSupportLoaderManager().initLoader(0, null, this);
 
         // If there's instance state, mine it for useful information.
         // The end-goal here is that the user never knows that turning their device sideways
@@ -209,11 +183,32 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
-
         getLoaderManager().initLoader(FORECAST_LOADER, null, this);
         super.onActivityCreated(savedInstanceState);
     }
 
+
+    @Override
+    public void onResume() {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        sp.registerOnSharedPreferenceChangeListener(this);
+        super.onResume();
+
+    }
+
+    @Override
+    public void onPause() {
+        SharedPreferences sp =PreferenceManager.getDefaultSharedPreferences(getActivity());
+        sp.unregisterOnSharedPreferenceChangeListener(this);
+        super.onPause();
+    }
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        if (key.equals(getString(R.string.pref_location_status_key)) ) {
+            Log.d(LOG_TAG,"Update view: "+getString(R.string.pref_location_status_key));
+            updateEmptyView();
+        }
+    }
 
     void onLocationChanged() {
         updateWeather();
@@ -232,11 +227,6 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
     public boolean onOptionsItemSelected(MenuItem item) {
 
         int id = item.getItemId();
-//        if (id == R.id.action_refresh) {
-//
-//            updateWeather();
-//            return true;
-//        }
 
         if (id == R.id.action_map) {
             openPreferredLocationInMap();
@@ -244,6 +234,8 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
 
         return super.onOptionsItemSelected(item);
     }
+
+
 
 
     private void updateWeather() {
@@ -285,99 +277,7 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
         return highLowStr;
     }
 
-//    private String formatHighLows(double high, double low, String unitType) {
-//
-//        if (unitType.equals(getString(R.string.pref_units_imperial))) {
-//            high = (high * 1.8) + 32;
-//            low = (low * 1.8) + 32;
-//        } else if (!unitType.equals(getString(R.string.pref_units_metric))) {
-//            Log.d(LOG_TAG, "Unit type not found: " + unitType);
-//        }
-//
-//        // For presentation, assume the user doesn't care about tenths of a degree.
-//        long roundedHigh = Math.round(high);
-//        long roundedLow = Math.round(low);
-//
-//        String highLowStr = roundedHigh + "/" + roundedLow;
-//        return highLowStr;
-//    }
 
-    /**
-     * Take the String representing the complete forecast in JSON Format and
-     * pull out the data we need to construct the Strings needed for the wireframes.
-     * <p/>
-     * Fortunately parsing is easy:  constructor takes the JSON string and converts it
-     * into an Object hierarchy for us.
-     */
-//    private String[] getWeatherDataFromJson(String forecastJsonStr, int numDays)
-//            throws JSONException {
-//
-//        // These are the names of the JSON objects that need to be extracted.
-//        final String OWM_LIST = "list";
-//        final String OWM_WEATHER = "weather";
-//        final String OWM_TEMPERATURE = "temp";
-//        final String OWM_MAX = "max";
-//        final String OWM_MIN = "min";
-//        final String OWM_DESCRIPTION = "main";
-//
-//        JSONObject forecastJson = new JSONObject(forecastJsonStr);
-//        JSONArray weatherArray = forecastJson.getJSONArray(OWM_LIST);
-//
-//        // OWM returns daily forecasts based upon the local time of the city that is being
-//        // asked for, which means that we need to know the GMT offset to translate this data
-//        // properly.
-//
-//        // Since this data is also sent in-order and the first day is always the
-//        // current day, we're going to take advantage of that to get a nice
-//        // normalized UTC date for all of our weather.
-//
-//        Time dayTime = new Time();
-//        dayTime.setToNow();
-//
-//        // we start at the day returned by local time. Otherwise this is a mess.
-//        int julianStartDay = Time.getJulianDay(System.currentTimeMillis(), dayTime.gmtoff);
-//
-//        // now we work exclusively in UTC
-//        dayTime = new Time();
-//
-//        String[] resultStrs = new String[numDays];
-//        for (int i = 0; i < weatherArray.length(); i++) {
-//            // For now, using the format "Day, description, hi/low"
-//            String day;
-//            String description;
-//            String highAndLow;
-//
-//            // Get the JSON object representing the day
-//            JSONObject dayForecast = weatherArray.getJSONObject(i);
-//
-//            // The date/time is returned as a long.  We need to convert that
-//            // into something human-readable, since most people won't read "1400356800" as
-//            // "this saturday".
-//            long dateTime;
-//            // Cheating to convert this to UTC time, which is what we want anyhow
-//            dateTime = dayTime.setJulianDay(julianStartDay + i);
-//            day = getReadableDateString(dateTime);
-//
-//            // description is in a child array called "weather", which is 1 element long.
-//            JSONObject weatherObject = dayForecast.getJSONArray(OWM_WEATHER).getJSONObject(0);
-//            description = weatherObject.getString(OWM_DESCRIPTION);
-//
-//            // Temperatures are in a child object called "temp".  Try not to name variables
-//            // "temp" when working with temperature.  It confuses everybody.
-//            JSONObject temperatureObject = dayForecast.getJSONObject(OWM_TEMPERATURE);
-//            double high = temperatureObject.getDouble(OWM_MAX);
-//            double low = temperatureObject.getDouble(OWM_MIN);
-//
-//            highAndLow = formatHighLows(high, low);
-//            resultStrs[i] = day + " - " + description + " - " + highAndLow;
-//        }
-//
-//        for (String s : resultStrs) {
-//            Log.v(LOG_TAG, "Forecast entry: " + s);
-//        }
-//        return resultStrs;
-//
-//    }
     public static double getMaxTemperatureForDay(String weatherJsonStr, int dayIndex)
             throws JSONException {
         // TODO: add parsing code here
@@ -483,8 +383,18 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
             if ( null != tv ) {
                 // if cursor is empty, why? do we have an invalid location
                 int message = R.string.empty_forecast_list;
-                if (!Utility.isNetworkAvailable(getActivity()) ) {
-                    message = R.string.empty_forecast_list_no_network;
+                @SunshineSyncAdapter.LocationStatus int location = Utility.getLocationStatus(getActivity());
+                switch (location) {
+                    case SunshineSyncAdapter.LOCATION_STATUS_SERVER_DOWN:
+                        message = R.string.empty_forecast_list_server_down;
+                        break;
+                    case SunshineSyncAdapter.LOCATION_STATUS_SERVER_INVALID:
+                        message = R.string.empty_forecast_list_server_error;
+                        break;
+                    default:
+                        if (!Utility.isNetworkAvailable(getActivity()) ) {
+                            message = R.string.empty_forecast_list_no_network;
+                        }
                 }
                 tv.setText(message);
             }
