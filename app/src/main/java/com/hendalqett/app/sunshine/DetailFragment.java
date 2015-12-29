@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.hendalqett.app.sunshine.data.WeatherContract;
 
 /**
@@ -89,7 +90,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
         Bundle arguments = getArguments();
         if (arguments != null) {
             mUri = arguments.getParcelable(DetailFragment.DETAIL_URI);
-            Log.d(LOG_TAG,mUri.toString());
+            Log.d(LOG_TAG, mUri.toString());
         }
 
 //        Intent intent = getActivity().getIntent();
@@ -192,7 +193,12 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
             int weatherId = data.getInt(COL_WEATHER_CONDITION_ID);
             // Use placeholder Image
 //       mIconView.setImageResource(R.mipmap.ic_launcher);
-            mIconView.setImageResource(Utility.getArtResourceForWeatherCondition(weatherId));
+//            mIconView.setImageResource(Utility.getArtResourceForWeatherCondition(weatherId));
+            Glide.with(this)
+                    .load(Utility.getArtUrlForWeatherCondition(getActivity(),weatherId))
+                    .error(Utility.getArtResourceForWeatherCondition(weatherId))
+                    .crossFade()
+                    .into(mIconView);
 
             // Read date from cursor and update views for day of week and date
             long date = data.getLong(COL_WEATHER_DATE);
@@ -204,8 +210,8 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
             // Read description from cursor and update view
             String description = data.getString(COL_WEATHER_DESC);
             mDescriptionView.setText(description);
-            mDescriptionView.setContentDescription(getString(R.string.a11y_forecast,description));
-            mIconView.setContentDescription(getString(R.string.a11y_forecast_icon,description));
+            mDescriptionView.setContentDescription(getString(R.string.a11y_forecast, description));
+            mIconView.setContentDescription(getString(R.string.a11y_forecast_icon, description));
 
             // Read high temperature from cursor and update view
             boolean isMetric = Utility.isMetric(getActivity());
@@ -213,13 +219,13 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
             double high = data.getDouble(COL_WEATHER_MAX_TEMP);
             String highString = Utility.formatTemperature(getActivity(), high, isMetric);
             mHighTempView.setText(highString);
-            mHighTempView.setContentDescription(getString(R.string.a11y_high_temp,highString));
+            mHighTempView.setContentDescription(getString(R.string.a11y_high_temp, highString));
 
             // Read low temperature from cursor and update view
             double low = data.getDouble(COL_WEATHER_MIN_TEMP);
             String lowString = Utility.formatTemperature(getActivity(), low, isMetric);
             mLowTempView.setText(lowString);
-            mLowTempView.setContentDescription(getString(R.string.a11y_low_temp,lowString));
+            mLowTempView.setContentDescription(getString(R.string.a11y_low_temp, lowString));
 
             // Read humidity from cursor and update view
             float humidity = data.getFloat(COL_WEATHER_HUMIDITY);

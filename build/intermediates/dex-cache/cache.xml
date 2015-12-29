@@ -2,13 +2,6 @@
 <items version="2" >
 
     <item
-        jar="/Users/hend/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/22.0.0/support-annotations-22.0.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
-        <dex dex="/Users/hend/Documents/Android Projects/Udacity Nanodegree/Git Repos/Sunshine-With-SuncAdapter/app/build/intermediates/pre-dexed/debug/support-annotations-22.0.0-778ccad598f6baa188d15a6b12f6853c004175bf.jar" />
-    </item>
-    <item
         jar="/Users/hend/Documents/Android Projects/Udacity Nanodegree/Git Repos/Sunshine-With-SuncAdapter/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/jars/libs/internal_impl-22.0.0.jar"
         jumboMode="false"
         revision="21.1.2"
@@ -21,6 +14,20 @@
         revision="21.1.2"
         sha1="d84409890828e07d344a3b9b1da545dba9897b51">
         <dex dex="/Users/hend/Documents/Android Projects/Udacity Nanodegree/Git Repos/Sunshine-With-SuncAdapter/app/build/intermediates/pre-dexed/debug/classes-925681fbe20c29856c1a8807c57e9f3b56b6c86f.jar" />
+    </item>
+    <item
+        jar="/Users/hend/.gradle/caches/modules-2/files-2.1/com.github.bumptech.glide/glide/3.6.1/86b122e640af09b0723e1fa44083c354ba6d9089/glide-3.6.1.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="86b122e640af09b0723e1fa44083c354ba6d9089">
+        <dex dex="/Users/hend/Documents/Android Projects/Udacity Nanodegree/Git Repos/Sunshine-With-SuncAdapter/app/build/intermediates/pre-dexed/debug/glide-3.6.1-c4342f4767371475dc73f7fc7f9070ac4d2ac7b2.jar" />
+    </item>
+    <item
+        jar="/Users/hend/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/22.0.0/support-annotations-22.0.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
+        <dex dex="/Users/hend/Documents/Android Projects/Udacity Nanodegree/Git Repos/Sunshine-With-SuncAdapter/app/build/intermediates/pre-dexed/debug/support-annotations-22.0.0-778ccad598f6baa188d15a6b12f6853c004175bf.jar" />
     </item>
     <item
         jar="/Users/hend/Documents/Android Projects/Udacity Nanodegree/Git Repos/Sunshine-With-SuncAdapter/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/jars/classes.jar"
