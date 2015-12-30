@@ -291,7 +291,7 @@ public class Utility {
     public static String getArtUrlForWeatherCondition(Context context, int weatherId) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         String formatArtUrl = prefs.getString(context.getString(R.string.pref_art_pack_key),
-                context.getString(R.string.format_art_url));
+                context.getString(R.string.pref_art_pack_sunshine));
 
         // Based on weather code data found at:
         // http://bugs.openweathermap.org/projects/api/wiki/Weather_Condition_Codes

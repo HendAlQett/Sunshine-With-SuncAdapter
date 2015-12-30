@@ -29,7 +29,7 @@
     <string name="action_map">Map Location</string>
     <string name="action_share">Share</string>
     <!-- Format for retrieving art from an external source [CHAR LIMIT=NONE] -->
-    <string name="format_art_url" translatable="false">https://raw.githubusercontent.com/udacity/Sunshine-Version-2/sunshine_master/app/src/main/res/drawable-xxhdpi/art_<xliff:g id="description">%s</xliff:g>.png</string>
+    <!--<string name="format_art_url" translatable="false">https://raw.githubusercontent.com/udacity/Sunshine-Version-2/sunshine_master/app/src/main/res/drawable-xxhdpi/art_<xliff:g id="description">%s</xliff:g>.png</string>-->
 
     <!-- Language-specific constants -->
     <string name="today">Today</string>
@@ -107,6 +107,18 @@
     <string name="a11y_low_temp">Low: <xliff:g id="low">%1$s</xliff:g></string>
 
 
+    <!-- Names of the art packs available -->
+       <string-array name="pref_art_pack_options">
+           <item>@string/pref_art_pack_label_sunshine</item>
+           <item>@string/pref_art_pack_label_cute_dogs</item>
+       </string-array>
+        <!-- Format for retrieving art from an external source [CHAR LIMIT=NONE] -->
+       <string-array name="pref_art_pack_values">
+            <item>@string/pref_art_pack_sunshine</item>
+           <item>@string/pref_art_pack_cute_dogs</item>
+       </string-array>
+
+
     <!-- Label for the art pack preference [CHAR LIMIT=30] -->
     <string name="pref_art_pack_label">Icon Pack</string>
 
@@ -120,10 +132,10 @@
     <string name="pref_art_pack_key" translatable="false">art_pack</string>
 
 
-    <!--&lt;!&ndash; Value in SharedPreferences for Sunshine art pack option [CHAR LIMIT=NONE] &ndash;&gt;-->
-    <!--<string name="pref_art_pack_sunshine" translatable="false">https://raw.githubusercontent.com/udacity/Sunshine-Version-2/sunshine_master/app/src/main/res/drawable-xxhdpi/art_%s.png</string>-->
+    <!-- Value in SharedPreferences for Sunshine art pack option [CHAR LIMIT=NONE] -->
+    <string name="pref_art_pack_sunshine" translatable="false">https://raw.githubusercontent.com/udacity/Sunshine-Version-2/sunshine_master/app/src/main/res/drawable-xxhdpi/art_%s.png</string>
 
-    <!--&lt;!&ndash; Value in SharedPreferences for cute dogs art pack  option [CHAR LIMIT=NONE] &ndash;&gt;-->
-    <!--<string name="pref_art_pack_cute_dogs" translatable="false">https://raw.githubusercontent.com/udacity/Sunshine-Version-2/sunshine_master/app/src/main/res/drawable-mdpi/art_%s.png</string>-->
+    <!-- Value in SharedPreferences for cute dogs art pack  option [CHAR LIMIT=NONE] -->
+    <string name="pref_art_pack_cute_dogs" translatable="false">https://raw.githubusercontent.com/udacity/Sunshine-Version-2/sunshine_master/app/src/main/res/drawable-mdpi/art_%s.png</string>
 
 </resources>
