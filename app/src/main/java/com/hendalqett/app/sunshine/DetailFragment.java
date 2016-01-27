@@ -9,7 +9,6 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -33,7 +32,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
     final String LOG_TAG = DetailFragment.class.getSimpleName();
     private String mForecastStr;
     private String mForecast;
-    ShareActionProvider mShareActionProvider;
+//    ShareActionProvider mShareActionProvider;
     private static final int DETAIL_LOADER = 0;
     private static final String[] DETAIL_COLUMNS = {
             WeatherContract.WeatherEntry.TABLE_NAME + "." + WeatherContract.WeatherEntry._ID,
@@ -105,7 +104,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
 //                    mForecastData = intent.getStringExtra(Intent.EXTRA_TEXT);
 //                }
 
-        View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_detail_start, container, false);
 //        TextView tvForecastData = (TextView) rootView.findViewById(R.id.detail_text);
 //        tvForecastData.setText(mForecastStr);
         mIconView = (ImageView) rootView.findViewById(R.id.detail_icon);
@@ -200,6 +199,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
                     null
             );
         }
+        getView().setVisibility(View.INVISIBLE);
         return null;
 
     }
@@ -209,6 +209,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         Log.v(LOG_TAG, "In onLoadFinished");
         if (data != null && data.moveToFirst()) {
+            getView().setVisibility(View.VISIBLE);
             // Read weather condition ID from cursor
             int weatherId = data.getInt(COL_WEATHER_CONDITION_ID);
             // Use placeholder Image
@@ -285,10 +286,10 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
             // We still need this for the share intent
             mForecast = String.format("%s - %s - %s/%s", dateText, description, high, low);
 
-            // If onCreateOptionsMenu has already happened, we need to update the share intent now.
-            if (mShareActionProvider != null) {
-                mShareActionProvider.setShareIntent(createShareForecastIntent());
-            }
+//            // If onCreateOptionsMenu has already happened, we need to update the share intent now.
+//            if (mShareActionProvider != null) {
+//                mShareActionProvider.setShareIntent(createShareForecastIntent());
+//            }
         }
 
         AppCompatActivity activity = (AppCompatActivity) getActivity();
