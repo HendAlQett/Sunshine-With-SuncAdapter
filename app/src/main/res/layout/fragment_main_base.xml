@@ -5,7 +5,6 @@
     android:elevation="@dimen/appbar_elevation"
     tools:context="com.hendalqett.app.sunshine.ForecastFragment">
     <android.support.v7.widget.RecyclerView
-        style="@style/ForecastListStyle"
         android:id="@+id/recyclerview_forecast"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
