@@ -1,17 +1,27 @@
 package com.hendalqett.app.sunshine;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.preference.PreferenceManager;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
+import com.hendalqett.app.sunshine.gcm.RegistrationIntentService;
 import com.hendalqett.app.sunshine.sync.SunshineSyncAdapter;
 
 
-public class MainActivity extends ActionBarActivity implements ForecastFragment.Callback {
+public class MainActivity extends AppCompatActivity implements ForecastFragment.Callback {
 
 
     final String LOG_TAG = MainActivity.class.getSimpleName();
@@ -20,11 +30,17 @@ public class MainActivity extends ActionBarActivity implements ForecastFragment.
     //private final String FORECASTFRAGMENT_TAG = "FFTAG";
     private static final String DETAILFRAGMENT_TAG = "DFTAG";
     boolean mTwoPane;
+    private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+    public static final String SENT_TOKEN_TO_SERVER = "sentTokenToServer";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         mLocation = Utility.getPreferredLocation(this);
 
 
@@ -53,7 +69,40 @@ public class MainActivity extends ActionBarActivity implements ForecastFragment.
         forecastFragment.setUseTodayLayout(!mTwoPane);
 
         SunshineSyncAdapter.initializeSyncAdapter(this);
+        if (checkPlayServices()) {
+            // This is where we could either prompt a user that they should install
+            // the latest version of Google Play Services, or add an error snackbar
+            // that some features won't be available.
 
+            // Because this is the initial creation of the app, we'll want to be certain we have
+            // a token. If we do not, then we will start the IntentService that will register this
+            // application with GCM.
+            SharedPreferences sharedPreferences =
+                    PreferenceManager.getDefaultSharedPreferences(this);
+            boolean sentToken = sharedPreferences.getBoolean(SENT_TOKEN_TO_SERVER, false);
+            if (!sentToken) {
+                Intent intent = new Intent(this, RegistrationIntentService.class);
+                startService(intent);
+            }
+
+        }
+
+    }
+
+    private boolean checkPlayServices() {
+        GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
+        int resultCode = apiAvailability.isGooglePlayServicesAvailable(this);
+        if (resultCode != ConnectionResult.SUCCESS) {
+            if (apiAvailability.isUserResolvableError(resultCode)) {
+                apiAvailability.getErrorDialog(this, resultCode,
+                        PLAY_SERVICES_RESOLUTION_REQUEST).show();
+            } else {
+                Log.i(LOG_TAG, "This device is not supported.");
+                finish();
+            }
+            return false;
+        }
+        return true;
     }
 
 
@@ -138,7 +187,6 @@ public class MainActivity extends ActionBarActivity implements ForecastFragment.
     }
 
 
-
     public void showMap(Uri geoLocation) {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(geoLocation);
@@ -148,7 +196,7 @@ public class MainActivity extends ActionBarActivity implements ForecastFragment.
     }
 
     @Override
-    public void onItemSelected(Uri contentUri) {
+    public void onItemSelected(Uri contentUri, ForecastAdapter.ForecastAdapterViewHolder vh) {
 
         if (mTwoPane) {
             // In two-pane mode, show the detail view in this activity by
@@ -164,7 +212,11 @@ public class MainActivity extends ActionBarActivity implements ForecastFragment.
         } else {
             Intent intent = new Intent(this, DetailActivity.class)
                     .setData(contentUri);
-            startActivity(intent);
+//            startActivity(intent);
+
+            ActivityOptionsCompat activityOptions =  ActivityOptionsCompat.makeSceneTransitionAnimation(this,
+                                                new Pair<View, String>(vh.mIconView, getString(R.string.detail_icon_transition_name)));
+            ActivityCompat.startActivity(this,intent,activityOptions.toBundle());
         }
 
 

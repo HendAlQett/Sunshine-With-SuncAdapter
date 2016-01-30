@@ -1,27 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:custom="http://schemas.android.com/apk/res/com.example.android.sunshine.app">
 
-    <EditTextPreference
-        android:title="@string/pref_location_label"
-        android:key="@string/pref_location_key"
+    <com.hendalqett.app.sunshine.LocationEditTextPreference
         android:defaultValue="@string/pref_location_default"
         android:inputType="text"
+        android:key="@string/pref_location_key"
         android:singleLine="true"
-        />
+        android:title="@string/pref_location_label"
+        app:minLength="3" />
 
     <ListPreference
-        android:title="@string/pref_units_label"
-        android:key="@string/pref_units_key"
-        android:entryValues="@array/listValues"
-        android:entries="@array/listArray"
         android:defaultValue="@string/pref_units_default"
+        android:entries="@array/listArray"
+        android:entryValues="@array/listValues"
+        android:key="@string/pref_units_key"
+        android:title="@string/pref_units_label"/>
 
-        />
+    <ListPreference
+        android:defaultValue="@string/pref_art_pack_sunshine"
+        android:entries="@array/pref_art_pack_options"
+        android:entryValues="@array/pref_art_pack_values"
+        android:key="@string/pref_art_pack_key"
+        android:title="@string/pref_art_pack_label" />
+
+    />
     <CheckBoxPreference
-        android:title="@string/pref_enable_notifications_label"
+        android:defaultValue="@string/pref_enable_notifications_default"
         android:key="@string/pref_enable_notifications_key"
         android:summaryOff="@string/pref_enable_notifications_false"
         android:summaryOn="@string/pref_enable_notifications_true"
-        android:defaultValue="@string/pref_enable_notifications_default" />
+        android:title="@string/pref_enable_notifications_label" />
 
 </PreferenceScreen>
