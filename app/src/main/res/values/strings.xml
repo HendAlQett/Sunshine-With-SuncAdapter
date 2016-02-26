@@ -11,6 +11,10 @@
     <!-- Key name for storing location status in SharedPreferences -->
     <string name="pref_location_status_key" translatable="false">loc-status</string>
 
+    <!-- Key name for storing location latlong in SharedPreferences -->
+    <string name="pref_location_latitude" translatable="false">loc-latitude</string>
+    <string name="pref_location_longitude" translatable="false">loc-longitude</string>
+
     <string name="pref_location_label">Location</string>
     <string name="pref_units_label">Temperature Units</string>
     <string name="pref_units_key">units</string>
@@ -108,15 +112,15 @@
 
 
     <!-- Names of the art packs available -->
-       <string-array name="pref_art_pack_options">
-           <item>@string/pref_art_pack_label_sunshine</item>
-           <item>@string/pref_art_pack_label_cute_dogs</item>
-       </string-array>
-        <!-- Format for retrieving art from an external source [CHAR LIMIT=NONE] -->
-       <string-array name="pref_art_pack_values">
-            <item>@string/pref_art_pack_sunshine</item>
-           <item>@string/pref_art_pack_cute_dogs</item>
-       </string-array>
+    <string-array name="pref_art_pack_options">
+        <item>@string/pref_art_pack_label_sunshine</item>
+        <item>@string/pref_art_pack_label_cute_dogs</item>
+    </string-array>
+    <!-- Format for retrieving art from an external source [CHAR LIMIT=NONE] -->
+    <string-array name="pref_art_pack_values">
+        <item>@string/pref_art_pack_sunshine</item>
+        <item>@string/pref_art_pack_cute_dogs</item>
+    </string-array>
 
 
     <!-- Label for the art pack preference [CHAR LIMIT=30] -->
@@ -139,7 +143,7 @@
     <string name="pref_art_pack_cute_dogs" translatable="false">https://raw.githubusercontent.com/udacity/Sunshine-Version-2/sunshine_master/app/src/main/res/drawable-mdpi/art_%s.png</string>
 
     <!-- Used to form a severe weather alert that reads "Heads up: <weather> in <location>!" -->
-     <string name="gcm_weather_alert">Heads up: %1$s in %2$s!</string>
+    <string name="gcm_weather_alert">Heads up: %1$s in %2$s!</string>
 
     <!--// TODO: Get the SenderID from the Developer Console-->
     <!--<string name="gcm_defaultSenderId" translatable="false"></string>-->
@@ -166,11 +170,14 @@
     <string name="condition_602">Heavy Snow</string>
     <string name="condition_611">Sleet</string>
     <string name="condition_612">Shower Sleet</string>
-    <string name="condition_615">Rain and Snow</string> <!-- light rain and snow -->
+    <string name="condition_615">Rain and Snow</string>
+    <!-- light rain and snow -->
     <string name="condition_616">Rain and Snow</string>
-    <string name="condition_620">Shower Snow</string> <!-- light shower snow -->
+    <string name="condition_620">Shower Snow</string>
+    <!-- light shower snow -->
     <string name="condition_621">Shower Snow</string>
-    <string name="condition_622">Shower Snow</string> <!-- heavy shower snow -->
+    <string name="condition_622">Shower Snow</string>
+    <!-- heavy shower snow -->
     <string name="condition_701">Mist</string>
     <string name="condition_711">Smoke</string>
     <string name="condition_721">Haze</string>
@@ -196,7 +203,8 @@
     <string name="condition_951">Calm</string>
     <string name="condition_952">Light Breeze</string>
     <string name="condition_953">Gentle Breeze</string>
-    <string name="condition_954">Breeze</string> <!-- moderate breeze -->
+    <string name="condition_954">Breeze</string>
+    <!-- moderate breeze -->
     <string name="condition_955">Fresh Breeze</string>
     <string name="condition_956">Strong Breeze</string>
     <string name="condition_957">High Wind</string>
@@ -212,4 +220,7 @@
 
     <!-- Content description for the get current location button in the location preference -->
     <string name="pref_current_location_desc">Use my location</string>
+
+    <!-- For Google Places API Attributions -->
+    <string name="attribution_text">Powered by Google</string>
 </resources>
