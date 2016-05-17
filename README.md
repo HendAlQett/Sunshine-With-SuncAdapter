@@ -30,7 +30,7 @@ The app allows users to view weather according to their location where there is 
 
 ##To run the app
 
-###Genrating API key for Weather Map API:
+###Generating API key for Weather Map API:
 http://openweathermap.org/appid#get
 
 ###How to use the API key to make requests:
