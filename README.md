@@ -43,4 +43,5 @@ http://openweathermap.org/appid#use
 ![device-2016-05-17-215134](https://cloud.githubusercontent.com/assets/4416384/15341300/23773dfe-1c8e-11e6-8401-926c70ecfbe2.png)
 ![device-2016-05-17-215236](https://cloud.githubusercontent.com/assets/4416384/15341303/24b4607a-1c8e-11e6-9cb2-6687cfc382f0.png)
 ![device-2016-05-17-215357](https://cloud.githubusercontent.com/assets/4416384/15341304/261d7744-1c8e-11e6-9560-bbbdbe70e341.png)
+![device-2016-05-18-012928](https://cloud.githubusercontent.com/assets/4416384/15343101/75a31664-1c9a-11e6-9237-bbf614e3746c.png)
 
