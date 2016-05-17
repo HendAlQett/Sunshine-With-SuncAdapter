@@ -29,7 +29,6 @@ The app allows users to view weather according to their location where there is 
 * CoordinatorLayout/AppBarLayout.
 * Support GridLayout.
 
-
 ##To run the app
 
 ###Genrating API key for Weather Map API:
@@ -37,3 +36,12 @@ http://openweathermap.org/appid#get
 
 ###How to use the API key to make requests:
 http://openweathermap.org/appid#use
+
+##Screenshots
+
+![device-2016-05-17-214936](https://cloud.githubusercontent.com/assets/4416384/15341298/23062876-1c8e-11e6-905c-8ac46e70a3a2.png)
+![device-2016-05-17-215023](https://cloud.githubusercontent.com/assets/4416384/15341299/23127ffe-1c8e-11e6-9688-32fb27781c35.png)
+![device-2016-05-17-215134](https://cloud.githubusercontent.com/assets/4416384/15341300/23773dfe-1c8e-11e6-8401-926c70ecfbe2.png)
+![device-2016-05-17-215236](https://cloud.githubusercontent.com/assets/4416384/15341303/24b4607a-1c8e-11e6-9cb2-6687cfc382f0.png)
+![device-2016-05-17-215357](https://cloud.githubusercontent.com/assets/4416384/15341304/261d7744-1c8e-11e6-9560-bbbdbe70e341.png)
+
