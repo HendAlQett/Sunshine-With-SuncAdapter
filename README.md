@@ -1,5 +1,4 @@
 # Sunshine with SyncAdapter
-This is the udacity sunshine app, and the network requests implemented SyncAdapter  
 
 ##Project Overview
 
