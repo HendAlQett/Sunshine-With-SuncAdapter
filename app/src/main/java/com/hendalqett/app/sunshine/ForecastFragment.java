@@ -7,7 +7,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -31,6 +33,7 @@ import android.view.ViewTreeObserver;
 import android.widget.AbsListView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.hendalqett.app.sunshine.data.WeatherContract;
 import com.hendalqett.app.sunshine.sync.SunshineSyncAdapter;
 
@@ -39,6 +42,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.concurrent.ExecutionException;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -110,6 +114,13 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
          * DetailFragmentCallback for when an item has been selected.
          */
         public void onItemSelected(Uri dateUri, ForecastAdapter.ForecastAdapterViewHolder vh);
+    }
+
+    public interface TodayDataCallback {
+        /**
+         * DetailFragmentCallback for when an item has been selected.
+         */
+        public void onTodayDataLoaded(String max, String min, Bitmap bitmap);
     }
 
     public ForecastFragment() {
@@ -465,6 +476,7 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         mForecastAdapter.swapCursor(data);
 
+       new SendFirstItemData().execute(data);
         if (mPosition != RecyclerView.NO_POSITION) {
             // If we don't need to restart the loader, and there's a desired position to restore
             // to, do so now.
@@ -546,6 +558,41 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
                 }
                 tv.setText(message);
             }
+        }
+    }
+
+    class SendFirstItemData extends AsyncTask<Cursor,Void,Void>
+    {
+
+        @Override
+        protected Void doInBackground(Cursor... params) {
+
+            Cursor cursor = params[0];
+            cursor.moveToPosition(0);
+            double high= cursor.getDouble(ForecastFragment.COL_WEATHER_MAX_TEMP);
+            String max= Utility.formatTemperature(getActivity(), high);
+            double low= cursor.getDouble(ForecastFragment.COL_WEATHER_MIN_TEMP);
+            String min= Utility.formatTemperature(getActivity(), low);
+            int weatherId = cursor.getInt(ForecastFragment.COL_WEATHER_CONDITION_ID);
+            Bitmap weatherIconBitmap=null;
+
+            try {
+                weatherIconBitmap = Glide.
+                        with(getActivity()).
+                        load(Utility.getArtUrlForWeatherCondition(getActivity(), weatherId)).
+                        asBitmap().
+                        into(100, 100). // Width and height
+                        get();
+
+                ((TodayDataCallback) getActivity()).onTodayDataLoaded(max,min,weatherIconBitmap);
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+
+            return null;
         }
     }
 }

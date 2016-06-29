@@ -15,6 +15,7 @@
     <permission
         android:name="com.hendalqett.app.sunshine.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
+
     <uses-permission android:name="com.hendalqett.app.sunshine.permission.C2D_MESSAGE" />
 
     <!-- Permissions required to use the Place Picker -->
@@ -26,13 +27,14 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <!--<provider-->
-        <!--android:authorities="com.hendalqett.app.sunshine"-->
-        <!--android:name="com.hendalqett.app.sunshine.data.WeatherProvider"-->
-        <!--android:enabled="true"-->
-        <!--android:exported="true"-->
-        <!--android:permission="com.hendalqett.app.sunshine.LICENCE_TO_KILL"-->
-        <!--/>-->
+
+        <!-- <provider -->
+        <!-- android:authorities="com.hendalqett.app.sunshine" -->
+        <!-- android:name="com.hendalqett.app.sunshine.data.WeatherProvider" -->
+        <!-- android:enabled="true" -->
+        <!-- android:exported="true" -->
+        <!-- android:permission="com.hendalqett.app.sunshine.LICENCE_TO_KILL" -->
+        <!-- /> -->
 
         <provider
             android:name=".data.WeatherProvider"
@@ -45,30 +47,28 @@
             android:label="Licenced to Kill"
             android:protectionLevel="dangerous" />
 
-
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.Main"
-           >
+            android:theme="@style/AppTheme.Main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--<activity-->
-        <!--android:name=".DetailActivity"-->
-        <!--android:label="@string/title_activity_detail" >-->
-        <!--</activity>-->
-        <!--<activity-->
-        <!--android:name=".DetailActivity"-->
-        <!--android:label="@string/title_activity_detail_activty"-->
-        <!--android:parentActivityName=".MainActivity" >-->
-        <!--<meta-data-->
-        <!--android:name="android.support.PARENT_ACTIVITY"-->
-        <!--android:value="com.hendalqett.app.sunshine.MainActivity" />-->
-        <!--</activity>-->
+        <!-- <activity -->
+        <!-- android:name=".DetailActivity" -->
+        <!-- android:label="@string/title_activity_detail" > -->
+        <!-- </activity> -->
+        <!-- <activity -->
+        <!-- android:name=".DetailActivity" -->
+        <!-- android:label="@string/title_activity_detail_activty" -->
+        <!-- android:parentActivityName=".MainActivity" > -->
+        <!-- <meta-data -->
+        <!-- android:name="android.support.PARENT_ACTIVITY" -->
+        <!-- android:value="com.hendalqett.app.sunshine.MainActivity" /> -->
+        <!-- </activity> -->
 
         <activity
             android:name=".DetailActivity"
@@ -88,13 +88,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.hendalqett.app.sunshine.MainActivity" />
         </activity>
-        <!--<service android:name=".service.SunshineService"/>-->
-        <!--<receiver android:name=".service.SunshineService$AlarmReceiver"/>-->
+        <!-- <service android:name=".service.SunshineService"/> -->
+        <!-- <receiver android:name=".service.SunshineService$AlarmReceiver"/> -->
 
         <service android:name=".sync.SunshineAuthenticatorService">
             <intent-filter>
                 <action android:name="android.accounts.AccountAuthenticator" />
             </intent-filter>
+
             <meta-data
                 android:name="android.accounts.AccountAuthenticator"
                 android:resource="@xml/authenticator" />
@@ -105,46 +106,46 @@
             <intent-filter>
                 <action android:name="android.content.SyncAdapter" />
             </intent-filter>
+
             <meta-data
                 android:name="android.content.SyncAdapter"
                 android:resource="@xml/syncadapter" />
         </service>
 
         <!-- The Google Cloud Messaging receiver and services -->
-                <receiver
-                    android:name="com.google.android.gms.gcm.GcmReceiver"
-                    android:exported="true"
-                    android:permission="com.google.android.c2dm.permission.SEND" >
-                    <intent-filter>
-                        <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-                        <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
-                        <category android:name="com.hendalqett.app.sunshine" />
-                    </intent-filter>
-                </receiver>
+        <receiver
+            android:name="com.google.android.gms.gcm.GcmReceiver"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
 
-            <service
-                android:name=".gcm.MyInstanceIDListenerService"
-                android:exported="false">
-                <intent-filter>
-                <action android:name="com.google.android.gms.iid.InstanceID"/>
+                <category android:name="com.hendalqett.app.sunshine" />
             </intent-filter>
-            </service>
-            <service
-                android:name=".gcm.RegistrationIntentService"
-                android:exported="false" >
-            </service>
+        </receiver>
+
+        <service
+            android:name=".gcm.MyInstanceIDListenerService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.android.gms.iid.InstanceID" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".gcm.RegistrationIntentService"
+            android:exported="false" />
         <service
             android:name=".gcm.MyGcmListenerService"
-            android:exported="false" >
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
             </intent-filter>
         </service>
 
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value=""/>
+            android:value="" />
     </application>
 
 </manifest>
