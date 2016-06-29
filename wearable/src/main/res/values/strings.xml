@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Wearable</string>
+    <string name="hello_world">Hello From Sunshine!</string>
+    <string name="my_digital_name">Weather</string>
+</resources>
