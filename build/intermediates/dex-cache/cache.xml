@@ -2,39 +2,67 @@
 <items version="2" >
 
     <item
-        jar="/Users/hend/Documents/Android Projects/Udacity Nanodegree/Git Repos/Sunshine-With-SuncAdapter/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/jars/libs/internal_impl-22.0.0.jar"
+        jar="/Users/hend/Documents/Android Projects/Udacity Nanodegree/Git Repos/Sunshine-With-SuncAdapter/wearable/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/jars/classes.jar"
         jumboMode="false"
-        revision="21.1.2"
-        sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
-        <dex dex="/Users/hend/Documents/Android Projects/Udacity Nanodegree/Git Repos/Sunshine-With-SuncAdapter/app/build/intermediates/pre-dexed/debug/internal_impl-22.0.0-151f68d4e8da4bc81bbfcee32e2a9e34cbd899d1.jar" />
+        revision="23.0.3"
+        sha1="01a90bbb9495a8bbf6f3cfdf12f1b35caaa9524b">
+        <dex dex="/Users/hend/Documents/Android Projects/Udacity Nanodegree/Git Repos/Sunshine-With-SuncAdapter/wearable/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-base-8.3.0_e50c7f33eb40f79b925d1dd8f5f1e6f57898c209.jar" />
     </item>
     <item
-        jar="/Users/hend/Documents/Android Projects/Udacity Nanodegree/Git Repos/Sunshine-With-SuncAdapter/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/jars/classes.jar"
+        jar="/Users/hend/Documents/Android Projects/Udacity Nanodegree/Git Repos/Sunshine-With-SuncAdapter/wearable/build/intermediates/exploded-aar/com.google.android.support/wearable/2.0.0-alpha1/jars/classes.jar"
         jumboMode="false"
-        revision="21.1.2"
-        sha1="d84409890828e07d344a3b9b1da545dba9897b51">
-        <dex dex="/Users/hend/Documents/Android Projects/Udacity Nanodegree/Git Repos/Sunshine-With-SuncAdapter/app/build/intermediates/pre-dexed/debug/classes-925681fbe20c29856c1a8807c57e9f3b56b6c86f.jar" />
+        revision="23.0.3"
+        sha1="198f86964d1fe34215742672a4e095f916f0f4d9">
+        <dex dex="/Users/hend/Documents/Android Projects/Udacity Nanodegree/Git Repos/Sunshine-With-SuncAdapter/wearable/build/intermediates/pre-dexed/debug/com.google.android.support-wearable-2.0.0-alpha1_569648c195c72cdd5049bd6d8c681c1cc0f39fef.jar" />
     </item>
     <item
-        jar="/Users/hend/.gradle/caches/modules-2/files-2.1/com.github.bumptech.glide/glide/3.6.1/86b122e640af09b0723e1fa44083c354ba6d9089/glide-3.6.1.jar"
+        jar="/Users/hend/Documents/Android Projects/Udacity Nanodegree/Git Repos/Sunshine-With-SuncAdapter/wearable/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/classes.jar"
         jumboMode="false"
-        revision="21.1.2"
-        sha1="86b122e640af09b0723e1fa44083c354ba6d9089">
-        <dex dex="/Users/hend/Documents/Android Projects/Udacity Nanodegree/Git Repos/Sunshine-With-SuncAdapter/app/build/intermediates/pre-dexed/debug/glide-3.6.1-c4342f4767371475dc73f7fc7f9070ac4d2ac7b2.jar" />
+        revision="23.0.3"
+        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
+        <dex dex="/Users/hend/Documents/Android Projects/Udacity Nanodegree/Git Repos/Sunshine-With-SuncAdapter/wearable/build/intermediates/pre-dexed/debug/com.android.support-support-v4-23.0.1_71e831c39d4df6d8ba23071e48f3c8f931d29057.jar" />
     </item>
     <item
-        jar="/Users/hend/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/22.0.0/support-annotations-22.0.0.jar"
+        jar="/Users/hend/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.0.1/support-annotations-23.0.1.jar"
         jumboMode="false"
-        revision="21.1.2"
-        sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
-        <dex dex="/Users/hend/Documents/Android Projects/Udacity Nanodegree/Git Repos/Sunshine-With-SuncAdapter/app/build/intermediates/pre-dexed/debug/support-annotations-22.0.0-778ccad598f6baa188d15a6b12f6853c004175bf.jar" />
+        revision="23.0.3"
+        sha1="1fce89a6428c51467090d7f424e4c9c3dbd55f7e">
+        <dex dex="/Users/hend/Documents/Android Projects/Udacity Nanodegree/Git Repos/Sunshine-With-SuncAdapter/wearable/build/intermediates/pre-dexed/debug/support-annotations-23.0.1_ea7bfbb656e759839a8502c337762cc86340287c.jar" />
     </item>
     <item
-        jar="/Users/hend/Documents/Android Projects/Udacity Nanodegree/Git Repos/Sunshine-With-SuncAdapter/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/jars/classes.jar"
+        jar="/Users/hend/Documents/Android Projects/Udacity Nanodegree/Git Repos/Sunshine-With-SuncAdapter/wearable/build/intermediates/exploded-aar/com.google.android.gms/play-services-wearable/8.3.0/jars/classes.jar"
         jumboMode="false"
-        revision="21.1.2"
-        sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
-        <dex dex="/Users/hend/Documents/Android Projects/Udacity Nanodegree/Git Repos/Sunshine-With-SuncAdapter/app/build/intermediates/pre-dexed/debug/classes-12fc174b0b91f7787a36e782231f9bb1973d2a17.jar" />
+        revision="23.0.3"
+        sha1="9aedc597d74c6d77258ce5236e9abff0c3cc65e3">
+        <dex dex="/Users/hend/Documents/Android Projects/Udacity Nanodegree/Git Repos/Sunshine-With-SuncAdapter/wearable/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-wearable-8.3.0_5be50417e96e6882f82d05729c89c2f28979871b.jar" />
+    </item>
+    <item
+        jar="/Users/hend/Documents/Android Projects/Udacity Nanodegree/Git Repos/Sunshine-With-SuncAdapter/wearable/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="345a1b5cf5b144ce18ba6962bc66a7e2f26c1c1b">
+        <dex dex="/Users/hend/Documents/Android Projects/Udacity Nanodegree/Git Repos/Sunshine-With-SuncAdapter/wearable/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-basement-8.3.0_c64bcde9ba6d5993734483568fd61b34f82b751e.jar" />
+    </item>
+    <item
+        jar="/Users/hend/.gradle/caches/modules-2/files-2.1/com.squareup/otto/1.3.8/cf615176cd1177edf71d3c9605f8dc148fede6be/otto-1.3.8.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="cf615176cd1177edf71d3c9605f8dc148fede6be">
+        <dex dex="/Users/hend/Documents/Android Projects/Udacity Nanodegree/Git Repos/Sunshine-With-SuncAdapter/wearable/build/intermediates/pre-dexed/debug/otto-1.3.8_9269ac2f4a32a41dd1262ad40cb45fca0ad43b97.jar" />
+    </item>
+    <item
+        jar="/Users/hend/Documents/Android Projects/Udacity Nanodegree/Git Repos/Sunshine-With-SuncAdapter/wearable/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.0.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="4356e230a981d1bbf047d848b91bc0d9b7c5bacc">
+        <dex dex="/Users/hend/Documents/Android Projects/Udacity Nanodegree/Git Repos/Sunshine-With-SuncAdapter/wearable/build/intermediates/pre-dexed/debug/com.android.support-recyclerview-v7-23.0.1_97a519574c47b453d59d12b661194b37a276e480.jar" />
+    </item>
+    <item
+        jar="/Users/hend/Documents/Android Projects/Udacity Nanodegree/Git Repos/Sunshine-With-SuncAdapter/wearable/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/libs/internal_impl-23.0.1.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
+        <dex dex="/Users/hend/Documents/Android Projects/Udacity Nanodegree/Git Repos/Sunshine-With-SuncAdapter/wearable/build/intermediates/pre-dexed/debug/internal_impl-23.0.1_bd2decb316f27395707fa6a4d2bd59b50693890d.jar" />
     </item>
 
 </items>
