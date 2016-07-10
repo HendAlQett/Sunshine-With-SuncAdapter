@@ -51,8 +51,17 @@ public class WeatherService extends WearableListenerService {
                       max = dataMap.getString(WEATHER_MAX_KEY);
                       min = dataMap.getString(WEATHER_MIN_KEY);
                      Asset asset = dataMap.getAsset(WEATHER_IMAGE_KEY);
+//                     runOnUiThread(new Runnable() {
+//                         @Override
+//                         public void run() {
+//
+////stuff that updates ui
+//
+//                         }
+//                     });
+//                     bus.post(new Weather(max,min,null));
                      Log.d("DataSent", "From Service: "+max);
-                     new LoadBitmapAsyncTask().execute(asset);
+                     new LoadBitmapAsyncTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,asset);
 
                  }
              }
@@ -62,22 +71,36 @@ public class WeatherService extends WearableListenerService {
     private class LoadBitmapAsyncTask extends AsyncTask<Asset, Void, Bitmap> {
 
         @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Log.e("DataSent", "Pre Load");
+        }
+
+        @Override
         protected Bitmap doInBackground(Asset... params) {
 
-            if (params.length > 0) {
+            Log.w("DataSent", "Requested an unknown Asset.");
+            try {
+                if (params.length > 0) {
 
-                Asset asset = params[0];
+                    Asset asset = params[0];
 
-                InputStream assetInputStream = Wearable.DataApi.getFdForAsset(
-                        mGoogleApiClient, asset).await().getInputStream();
+                    InputStream assetInputStream = Wearable.DataApi.getFdForAsset(
+                            mGoogleApiClient, asset).await().getInputStream();
 
-                if (assetInputStream == null) {
-                    Log.w("DataSent", "Requested an unknown Asset.");
+                    if (assetInputStream == null) {
+                        Log.w("DataSent", "Requested an unknown Asset.");
+                        return null;
+                    }
+                    return BitmapFactory.decodeStream(assetInputStream);
+
+                } else {
+                    Log.e("DataSent", "Asset must be non-null");
                     return null;
                 }
-                return BitmapFactory.decodeStream(assetInputStream);
-
-            } else {
+            }
+            catch (Exception e)
+            {
                 Log.e("DataSent", "Asset must be non-null");
                 return null;
             }
@@ -86,10 +109,11 @@ public class WeatherService extends WearableListenerService {
         @Override
         protected void onPostExecute(Bitmap bitmap) {
 
-            if (bitmap != null) {
+//            if (bitmap != null) {
 
                 bus.post(new Weather(max,min,bitmap));
-            }
+                Log.e("DataSent", "Posted");
+//            }
         }
     }
 }

@@ -3,6 +3,7 @@ package com.hendalqett.app.sunshine;
 import android.os.Bundle;
 import android.support.wearable.activity.WearableActivity;
 import android.support.wearable.view.BoxInsetLayout;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,14 +26,11 @@ public class MainActivity extends WearableActivity  {
             new SimpleDateFormat("HH", Locale.US);
     private static final SimpleDateFormat MINUTES_DATE_FORMAT =
             new SimpleDateFormat(":mm", Locale.US);
-    private static final String WEATHER_MAX_KEY = "weather_max";
-    private static final String WEATHER_MIN_KEY = "weather_min";
-    private static final String WEATHER_IMAGE_KEY = "weather_photo";
-//    private GoogleApiClient mGoogleApiClient;
+
 
     private BoxInsetLayout mContainerView;
+    private TextView mClockHour;
     private TextView mClockMin;
-    private TextView mClockSec;
     private TextView mDate;
     private TextView mMaxView;
     private TextView mMinView;
@@ -45,19 +43,15 @@ public class MainActivity extends WearableActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        mGoogleApiClient = new GoogleApiClient.Builder(this)
-//                .addApi(Wearable.API)
-//                .addConnectionCallbacks(this)
-//                .addOnConnectionFailedListener(this)
-//                .build();
+
 
         setAmbientEnabled();
         dateFull = new SimpleDateFormat("E, MMM d, yyyy").format(new Date());
 
         mContainerView = (BoxInsetLayout) findViewById(R.id.container);
         mDate = (TextView) findViewById(R.id.tvDate);
+        mClockHour = (TextView) findViewById(R.id.clockHour);
         mClockMin = (TextView) findViewById(R.id.clockMin);
-        mClockSec = (TextView) findViewById(R.id.clockSec);
         mMaxView = (TextView) findViewById(R.id.tvMax);
         mMinView = (TextView) findViewById(R.id.tvMin);
         mWeatherIcon = (ImageView) findViewById(R.id.ivWeather);
@@ -101,25 +95,13 @@ public class MainActivity extends WearableActivity  {
     private void updateDisplay() {
 
         mDate.setText(dateFull);
-//        mClockMin.setVisibility(View.VISIBLE);
-//        mClockSec.setVisibility(View.VISIBLE);
-//        mClockMin.setTextColor(getResources().getColor(android.R.color.white));
-//        mClockSec.setTextColor(getResources().getColor(android.R.color.white));
-        mClockMin.setText(HOUR_DATE_FORMAT.format(new Date()));
-        mClockSec.setText(MINUTES_DATE_FORMAT.format(new Date()));
+        mClockHour.setText(HOUR_DATE_FORMAT.format(new Date()));
+        mClockMin.setText(MINUTES_DATE_FORMAT.format(new Date()));
         if (isAmbient()) {
             mContainerView.setBackgroundColor(getResources().getColor(android.R.color.black));
-//            mClockView.setTextColor(getResources().getColor(android.R.color.white));
 
-
-//            mClockView.setText(AMBIENT_DATE_FORMAT.format(new Date()));
-
-//            mClockView.setText(HOUR_DATE_FORMAT.format(new Date())+MINUTES_DATE_FORMAT.format(new Date()));
         } else {
             mContainerView.setBackgroundColor(getResources().getColor(R.color.primary));
-
-//            mClockView.setVisibility(View.VISIBLE);
-//            mClockView.setText(HOUR_DATE_FORMAT.format(new Date())+MINUTES_DATE_FORMAT.format(new Date()));
         }
 
 
@@ -128,76 +110,11 @@ public class MainActivity extends WearableActivity  {
     @Subscribe
     public void updateWeather(Weather weather) {
 
+        Log.d("DataSent","updating");
         mMaxView.setText(weather.getMax());
         mMinView.setText(weather.getMin());
         mWeatherIcon.setImageBitmap(weather.getBitmap());
     }
 
-//    @Override
-//    public void onDataChanged(DataEventBuffer dataEvents) {
-//        for (DataEvent dataEvent : dataEvents)
-//        {
-//            if (dataEvent.getType()==DataEvent.TYPE_CHANGED)
-//            {
-//                DataMap dataMap = DataMapItem.fromDataItem(dataEvent.getDataItem()).getDataMap();
-//                String path = dataEvent.getDataItem().getUri().getPath();
-//                if (path.equals("/com.hend.weather"))
-//                {
-//                    String max = dataMap.getString(WEATHER_MAX_KEY);
-//                    String min = dataMap.getString(WEATHER_MIN_KEY);
-//                    Asset asset = dataMap.getAsset(WEATHER_IMAGE_KEY);
-//                    Log.d("DataSent", "From Service: "+max);
-//                }
-//            }
-//        }
-//    }
 
-//    @Override
-//    public void onConnected(Bundle bundle) {
-////        Wearable.DataApi.addListener(mGoogleApiClient, this);
-//    }
-//
-//    @Override
-//    public void onConnectionSuspended(int i) {
-//        Log.d("DataSent","Connection Suspended");
-//    }
-//
-//    @Override
-//    public void onConnectionFailed(ConnectionResult connectionResult) {
-//        Log.d("DataSent","Connection Failed");
-//    }
-//    private class LoadBitmapAsyncTask extends AsyncTask<Asset, Void, Bitmap> {
-//
-//        @Override
-//        protected Bitmap doInBackground(Asset... params) {
-//
-//            if (params.length > 0) {
-//
-//                Asset asset = params[0];
-//
-//                InputStream assetInputStream = Wearable.DataApi.getFdForAsset(
-//                        mGoogleApiClient, asset).await().getInputStream();
-//
-//                if (assetInputStream == null) {
-//                    Log.w("DataSent", "Requested an unknown Asset.");
-//                    return null;
-//                }
-//                return BitmapFactory.decodeStream(assetInputStream);
-//
-//            } else {
-//                Log.e("DataSent", "Asset must be non-null");
-//                return null;
-//            }
-//        }
-//
-//        @Override
-//        protected void onPostExecute(Bitmap bitmap) {
-//
-//            if (bitmap != null) {
-////                LOGD(TAG, "Setting background image on second page..");
-////                moveToPage(1);
-////                mAssetFragment.setBackgroundImage(bitmap);
-//            }
-//        }
-//    }
 }

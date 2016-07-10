@@ -23,7 +23,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/clockMin"
+                android:id="@+id/clockHour"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="40sp"
@@ -33,7 +33,7 @@
                 />
 
             <TextView
-                android:id="@+id/clockSec"
+                android:id="@+id/clockMin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="40sp"
@@ -49,7 +49,8 @@
             android:layout_height="wrap_content"
             android:textColor="@color/primary_light"
             android:textSize="20sp"
-            app:layout_box="all" />
+            app:layout_box="all"
+            android:layout_centerHorizontal="true"/>
 
         <View
             android:id="@+id/line"
