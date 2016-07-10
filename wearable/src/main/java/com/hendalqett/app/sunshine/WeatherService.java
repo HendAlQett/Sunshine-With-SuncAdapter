@@ -51,15 +51,6 @@ public class WeatherService extends WearableListenerService {
                       max = dataMap.getString(WEATHER_MAX_KEY);
                       min = dataMap.getString(WEATHER_MIN_KEY);
                      Asset asset = dataMap.getAsset(WEATHER_IMAGE_KEY);
-//                     runOnUiThread(new Runnable() {
-//                         @Override
-//                         public void run() {
-//
-////stuff that updates ui
-//
-//                         }
-//                     });
-//                     bus.post(new Weather(max,min,null));
                      Log.d("DataSent", "From Service: "+max);
                      new LoadBitmapAsyncTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,asset);
 
@@ -79,7 +70,7 @@ public class WeatherService extends WearableListenerService {
         @Override
         protected Bitmap doInBackground(Asset... params) {
 
-            Log.w("DataSent", "Requested an unknown Asset.");
+
             try {
                 if (params.length > 0) {
 

@@ -163,9 +163,7 @@ public class WeatherWatchFace extends CanvasWatchFaceService {
             mBackgroundPaint = new Paint();
             mBackgroundPaint.setColor(resources.getColor(R.color.background));
 
-//            mTextPaint = new Paint();
-//            mTextPaint = createTextPaint(resources.getColor(R.color.digital_text));
-
+ 
             mTime = new Time();
 
             LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -177,12 +175,7 @@ public class WeatherWatchFace extends CanvasWatchFaceService {
             display.getSize(displaySize);
 
             // Find some views for later use
-//            day = (TextView) myLayout.findViewById(R.id.day);
-//            date = (TextView) myLayout.findViewById(R.id.date);
-//            month = (TextView) myLayout.findViewById(R.id.month);
-//            hour = (TextView) myLayout.findViewById(R.id.hour);
-//            minute = (TextView) myLayout.findViewById(R.id.minute);
-//            second = (TextView) myLayout.findViewById(R.id.second);
+
             mContainerView = (BoxInsetLayout) myLayout.findViewById(R.id.container);
             mDate = (TextView) myLayout.findViewById(R.id.tvDate);
             mClockHour = (TextView) myLayout.findViewById(R.id.clockHour);
@@ -192,7 +185,7 @@ public class WeatherWatchFace extends CanvasWatchFaceService {
             mWeatherIcon = (ImageView) myLayout.findViewById(R.id.ivWeather);
             mLine = myLayout.findViewById(R.id.line);
 
-//            mDate.setTextColor(Color.WHITE);
+
 
 
         }
@@ -203,13 +196,7 @@ public class WeatherWatchFace extends CanvasWatchFaceService {
             super.onDestroy();
         }
 
-//        private Paint createTextPaint(int textColor) {
-//            Paint paint = new Paint();
-//            paint.setColor(textColor);
-//            paint.setTypeface(NORMAL_TYPEFACE);
-//            paint.setAntiAlias(true);
-//            return paint;
-//        }
+
 
         @Override
         public void onVisibilityChanged(boolean visible) {
@@ -254,14 +241,6 @@ public class WeatherWatchFace extends CanvasWatchFaceService {
             super.onApplyWindowInsets(insets);
 
             // Load resources that have alternate values for round watches.
-//            Resources resources = WeatherWatchFace.this.getResources();
-//            boolean isRound = insets.isRound();
-//            mXOffset = resources.getDimension(isRound
-//                    ? R.dimen.digital_x_offset_round : R.dimen.digital_x_offset);
-//            float textSize = resources.getDimension(isRound
-//                    ? R.dimen.digital_text_size_round : R.dimen.digital_text_size);
-
-//            mTextPaint.setTextSize(textSize);
 
             if (insets.isRound()) {
                 // Shrink the face to fit on a round screen
