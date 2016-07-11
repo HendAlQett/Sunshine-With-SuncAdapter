@@ -144,12 +144,7 @@ public class WeatherWatchFace extends CanvasWatchFaceService {
         @Override
         public void onCreate(SurfaceHolder holder) {
             super.onCreate(holder);
-
-//            mGoogleApiClient = new GoogleApiClient.Builder(WeatherWatchFace.this)
-//                    .addApi(Wearable.API)
-//                    .addConnectionCallbacks(this)
-//                    .addOnConnectionFailedListener(this)
-//                    .build();
+ 
 
             setWatchFaceStyle(new WatchFaceStyle.Builder(WeatherWatchFace.this)
                     .setCardPeekMode(WatchFaceStyle.PEEK_MODE_VARIABLE)
@@ -163,7 +158,7 @@ public class WeatherWatchFace extends CanvasWatchFaceService {
             mBackgroundPaint = new Paint();
             mBackgroundPaint.setColor(resources.getColor(R.color.background));
 
- 
+
             mTime = new Time();
 
             LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
